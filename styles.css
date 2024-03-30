@@ -49,6 +49,7 @@ body {
     text-align: right;
     padding: 0 8px;
     margin-bottom: 12px;
+    overflow: hidden;
 }
 
 .keys {
