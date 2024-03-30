@@ -34,3 +34,30 @@ function operate(operator, firstNumber, secondNumber) {
       return "Syntax ERROR";
   }
 }
+
+// Select display elements
+const questionDisplay = document.querySelector(".question");
+const answerDisplay = document.querySelector(".answer");
+
+// Initialize display variables
+let currentQuestion = ""; // Store current expression
+let currentAnswer = ""; // Store current answer
+
+// Function to update display
+function updateDisplay() {
+  questionDisplay.textContent = currentQuestion;
+  answerDisplay.textContent = currentAnswer;
+}
+
+// Function to clear display
+function clearDisplay() {
+  currentQuestion = "";
+  currentAnswer = "";
+  updateDisplay();
+}
+
+// Function to handle backspace
+function backspace() {
+  currentQuestion = currentQuestion.slice(0, -1);
+  updateDisplay();
+}
