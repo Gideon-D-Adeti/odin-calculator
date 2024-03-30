@@ -75,3 +75,11 @@ document.querySelector(".clear").addEventListener("click", () => {
 document.querySelector(".backspace").addEventListener("click", () => {
   backspace();
 });
+
+// Add event listener to operator buttons
+document.querySelectorAll(".operator").forEach((button) => {
+  button.addEventListener("click", () => {
+    displayValue += `${button.textContent}`;
+    updateDisplay();
+  });
+});
