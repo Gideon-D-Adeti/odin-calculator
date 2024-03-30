@@ -58,10 +58,20 @@ function backspace() {
   updateDisplay();
 }
 
-// Add event listeners to number buttons
+// Add event listener to number buttons
 document.querySelectorAll(".number").forEach((button) => {
   button.addEventListener("click", () => {
     displayValue += button.textContent;
     updateDisplay();
   });
+});
+
+// Add event listener to clear button
+document.querySelector(".clear").addEventListener("click", () => {
+  clearDisplay();
+});
+
+// Add event listener to backspace button
+document.querySelector(".backspace").addEventListener("click", () => {
+  backspace();
 });
