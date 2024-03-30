@@ -36,28 +36,24 @@ function operate(operator, firstNumber, secondNumber) {
 }
 
 // Select display elements
-const questionDisplay = document.querySelector(".question");
-const answerDisplay = document.querySelector(".answer");
+const display = document.querySelector(".display");
 
-// Initialize display variables
-let currentQuestion = ""; // Store current expression
-let currentAnswer = ""; // Store current answer
+// Initialize display variable
+let displayValue = ""; // Store current expression
 
 // Function to update display
 function updateDisplay() {
-  questionDisplay.textContent = currentQuestion;
-  answerDisplay.textContent = currentAnswer;
+  display.textContent = displayValue;
 }
 
 // Function to clear display
 function clearDisplay() {
-  currentQuestion = "";
-  currentAnswer = "";
+  displayValue = "";
   updateDisplay();
 }
 
 // Function to handle backspace
 function backspace() {
-  currentQuestion = currentQuestion.slice(0, -1);
+  displayValue = displayValue.slice(0, -1);
   updateDisplay();
 }
