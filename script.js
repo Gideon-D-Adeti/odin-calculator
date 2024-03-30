@@ -43,6 +43,7 @@ let displayValue = ""; // Store current expression
 
 // Function to update display
 function updateDisplay() {
+  displayValue = displayValue.toString();
   display.textContent = displayValue;
 }
 
@@ -79,12 +80,12 @@ document.querySelector(".backspace").addEventListener("click", () => {
 // Add event listener to operator buttons
 document.querySelectorAll(".operator").forEach((button) => {
   button.addEventListener("click", () => {
-    const operator = button.textContent;
+    operator = button.textContent;
 
-    // Check if displayValue is not empty or operator is not a minus sign
+    // Check if displayValue is not empty or operator is a minus sign
     if (displayValue !== "" || operator === "-") {
       // Check if the last character is a valid character to add an operator
-      if (!"+-x÷".includes(displayValue[displayValue.length - 1])) {
+      if (!"+-x÷".includes(displayValue.at(-1))) {
         // Add operator to displayValue
         displayValue += operator;
 
@@ -102,4 +103,82 @@ document.querySelectorAll(".operator").forEach((button) => {
       }
     }
   });
+});
+
+// Add event listener to equal button
+document.querySelector(".equal").addEventListener("click", () => {
+  // If last character is an operator, display Syntax ERROR
+  if ("+-x÷".includes(displayValue.slice(-1)) || +displayValue === NaN) {
+    displayValue = displayValue;
+    updateDisplay();
+  }
+
+  // Check if displayValue contains both 'x' and '-'
+  else if (displayValue.includes("x") && displayValue.includes("-")) {
+    operator = "x";
+    [firstNumber, secondNumber] = displayValue.split(operator).map(parseFloat);
+
+    // Perform operation with firstNumber and secondNumber
+    displayValue = operate("*", firstNumber, secondNumber);
+
+    updateDisplay();
+  }
+  // Check if displayValue contains both '÷' and '-'
+  else if (displayValue.includes("÷") && displayValue.includes("-")) {
+    operator = "÷";
+    [firstNumber, secondNumber] = displayValue.split(operator).map(parseFloat);
+
+    // Perform operation with firstNumber and secondNumber
+    displayValue = operate("/", firstNumber, secondNumber);
+
+    updateDisplay();
+  }
+  // Check if displayValue contains two minuses as in '-6-6'
+  else if (
+    displayValue.includes("-") &&
+    displayValue.match(/-/g).length === 2
+  ) {
+    // Find the index of the second minus sign
+    const secondMinusIndex = displayValue.lastIndexOf("-");
+
+    // Split displayValue into two parts based on the second minus sign
+    firstNumber = parseFloat(displayValue.slice(0, secondMinusIndex));
+    secondNumber = parseFloat(displayValue.slice(secondMinusIndex + 1));
+
+    // Perform subtraction operation between firstNumber and secondNumber
+    displayValue = operate("-", firstNumber, secondNumber);
+
+    updateDisplay();
+  }
+  // Check if displayValue contains one minus and no other operator as in '4-6'
+  else if (
+    displayValue.includes("-") &&
+    displayValue.match(/-/g).length === 1 &&
+    displayValue.match(/[+x÷]/) === null
+  ) {
+    operator = "-";
+    [firstNumber, secondNumber] = displayValue.split(operator).map(parseFloat);
+
+    // Perform operation with firstNumber and secondNumber
+    displayValue = operate("-", firstNumber, secondNumber);
+
+    updateDisplay();
+  } else {
+    // Split currentQuestion into numbers and operator
+    [firstNumber, secondNumber] = displayValue.split(/[+x÷]/).map(parseFloat);
+    operator = displayValue.match(/[+x÷]/)[0];
+
+    // Check if numbers are valid
+    if (isNaN(firstNumber) || isNaN(secondNumber)) {
+      displayValue = "Syntax ERROR";
+    } else {
+      // Convert 'x' to '*' and '÷' to '/' for calculation
+      operator = operator === "x" ? "*" : operator === "÷" ? "/" : operator;
+
+      // Calculate result using operate function
+      displayValue = operate(operator, firstNumber, secondNumber);
+
+      updateDisplay();
+    }
+  }
 });
