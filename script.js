@@ -79,7 +79,27 @@ document.querySelector(".backspace").addEventListener("click", () => {
 // Add event listener to operator buttons
 document.querySelectorAll(".operator").forEach((button) => {
   button.addEventListener("click", () => {
-    displayValue += `${button.textContent}`;
-    updateDisplay();
+    const operator = button.textContent;
+
+    // Check if displayValue is not empty or operator is not a minus sign
+    if (displayValue !== "" || operator === "-") {
+      // Check if the last character is a valid character to add an operator
+      if (!"+-x÷".includes(displayValue[displayValue.length - 1])) {
+        // Add operator to displayValue
+        displayValue += operator;
+
+        // Update display
+        updateDisplay();
+      } else if (
+        (displayValue.endsWith("x") || displayValue.endsWith("÷")) &&
+        operator === "-"
+      ) {
+        // Allow adding minus sign after multiplication or division
+        displayValue += operator;
+
+        // Update display
+        updateDisplay();
+      }
+    }
   });
 });
