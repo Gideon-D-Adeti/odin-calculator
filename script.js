@@ -57,3 +57,11 @@ function backspace() {
   displayValue = displayValue.slice(0, -1);
   updateDisplay();
 }
+
+// Add event listeners to number buttons
+document.querySelectorAll(".number").forEach((button) => {
+  button.addEventListener("click", () => {
+    displayValue += button.textContent;
+    updateDisplay();
+  });
+});
