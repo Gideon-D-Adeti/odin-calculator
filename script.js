@@ -107,8 +107,8 @@ document.querySelectorAll(".operator").forEach((button) => {
 
 // Add event listener to equal button
 document.querySelector(".equal").addEventListener("click", () => {
-  // If last character is an operator, display Syntax ERROR
-  if ("+-x÷".includes(displayValue.slice(-1)) || +displayValue === NaN) {
+  // Handle invalid or incomplete inputs [Egs. Case 1: 6+, Case 2: 'Syntax ERROR', Case 3: -6]
+  if ("+-x÷".includes(displayValue.at(-1)) || +displayValue === NaN || displayValue.match(/[+x÷]/) === null) {
     displayValue = displayValue;
     updateDisplay();
   }
@@ -171,6 +171,8 @@ document.querySelector(".equal").addEventListener("click", () => {
     // Check if numbers are valid
     if (isNaN(firstNumber) || isNaN(secondNumber)) {
       displayValue = "Syntax ERROR";
+      
+      updateDisplay();
     } else {
       // Convert 'x' to '*' and '÷' to '/' for calculation
       operator = operator === "x" ? "*" : operator === "÷" ? "/" : operator;
