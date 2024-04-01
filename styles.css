@@ -93,3 +93,17 @@ button:hover {
 button:active {
     transform: scale(0.95);
 }
+
+.author {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    font-family: "Times New Roman", serif;
+}
+
+.name {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: "Courier New", monospace;
+}
