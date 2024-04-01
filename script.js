@@ -80,6 +80,15 @@ document.querySelector(".backspace").addEventListener("click", () => {
 // Add event listener to operator buttons
 document.querySelectorAll(".operator").forEach((button) => {
   button.addEventListener("click", () => {
+
+    // Get the equal button element
+    const equalButton = document.querySelector(".equal");
+
+    if (isValidExpression(displayValue)) {
+      // Trigger the click event on the equal button
+      equalButton.click();
+    }
+    
     operator = button.textContent;
 
     // Check if displayValue is not empty or operator is a minus sign
@@ -104,6 +113,15 @@ document.querySelectorAll(".operator").forEach((button) => {
     }
   });
 });
+
+// Function to check if the expression is valid after an operator is pressed
+function isValidExpression(displayValue) {
+  // Regular expression pattern to match a valid expression
+  const pattern = /(-?\d+(\.\d+)?)[+\-x÷]+(-?\d+(\.\d+)?)/;
+
+  // Check if the current expression matches the pattern
+  return pattern.test(displayValue);
+}
 
 function validateExpression(displayValue) {
   // Check if displayValue is empty
