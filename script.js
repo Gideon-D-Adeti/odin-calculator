@@ -1,13 +1,19 @@
 function add(a, b) {
-  return a + b;
+  let result = a + b;
+  // Limit result to two decimal places
+  return parseFloat(result.toFixed(2));
 }
 
 function subtract(a, b) {
-  return a - b;
+  let result = a - b;
+  // Limit result to two decimal places
+  return parseFloat(result.toFixed(2));
 }
 
 function multiply(a, b) {
-  return a * b;
+  let result = a * b;
+  // Limit result to two decimal places
+  return parseFloat(result.toFixed(2));
 }
 
 function divide(a, b) {
@@ -15,7 +21,9 @@ function divide(a, b) {
     return "Math ERROR";
   }
 
-  return a / b;
+  let result = a / b;
+  // Limit result to two decimal places
+  return parseFloat(result.toFixed(2));
 }
 
 let firstNumber, operator, secondNumber;
