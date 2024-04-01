@@ -105,8 +105,28 @@ document.querySelectorAll(".operator").forEach((button) => {
   });
 });
 
+function validateExpression(displayValue) {
+  // Check if displayValue is empty
+  if (displayValue === "") {
+    return false;
+  }
+  // Check if displayValue ends with an operator
+  else if ("+-x÷".includes(displayValue.at(-1))) {
+    return false;
+  }
+  // Check if displayValue is just a number (positive or negative)
+  else if (/^-?\d+$/.test(displayValue)) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // Add event listener to equal button
 document.querySelector(".equal").addEventListener("click", () => {
+  if (validateExpression(displayValue) === false) {
+    return; // Do nothing
+  }
   // Check if displayValue contains both 'x' and '-'
   if (displayValue.includes("x") && displayValue.includes("-")) {
     operator = "x";
@@ -165,7 +185,7 @@ document.querySelector(".equal").addEventListener("click", () => {
     // Check if numbers are valid
     if (isNaN(firstNumber) || isNaN(secondNumber)) {
       displayValue = "Syntax ERROR";
-      
+
       updateDisplay();
     } else {
       // Convert 'x' to '*' and '÷' to '/' for calculation
