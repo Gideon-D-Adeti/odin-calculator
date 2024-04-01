@@ -80,7 +80,6 @@ document.querySelector(".backspace").addEventListener("click", () => {
 // Add event listener to operator buttons
 document.querySelectorAll(".operator").forEach((button) => {
   button.addEventListener("click", () => {
-
     // Get the equal button element
     const equalButton = document.querySelector(".equal");
 
@@ -88,7 +87,7 @@ document.querySelectorAll(".operator").forEach((button) => {
       // Trigger the click event on the equal button
       equalButton.click();
     }
-    
+
     operator = button.textContent;
 
     // Check if displayValue is not empty or operator is a minus sign
@@ -222,4 +221,25 @@ document.querySelector(".equal").addEventListener("click", () => {
       updateDisplay();
     }
   }
+});
+
+// Add event listener to the decimal button
+document.querySelector(".decimal").addEventListener("click", () => {
+  // Check if the current expression is empty or the previous value is an operator
+  if (displayValue === "" || "+-x÷".includes(displayValue.at(-1))) {
+    // If the current expression is empty or the previous value is an operator, add "0." to the expression
+    displayValue += "0.";
+  } else {
+    // Check if the second number in the current expression already contains a decimal point
+    const numbers = displayValue.split(/[+\-x÷]/);
+    const lastNumber = numbers.at(-1);
+    if (!lastNumber.includes(".")) {
+      // If the second number doesn't already contain a decimal point, add "." to the expression
+      displayValue += ".";
+    } else {
+      return; // Do nothing
+    }
+  }
+  // Update the display
+  updateDisplay();
 });
