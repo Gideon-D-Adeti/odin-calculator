@@ -243,3 +243,39 @@ document.querySelector(".decimal").addEventListener("click", () => {
   // Update the display
   updateDisplay();
 });
+
+// Add event listener to the percentage button
+document.querySelector(".percent").addEventListener("click", () => {
+  // Check if the display value is empty or ends with an operator
+  if (displayValue === "" || "+-x÷".includes(displayValue.at(-1))) {
+    return; // Do nothing if the conditions are not met
+  }
+
+  // Define a regular expression to match numbers in the expression
+  const numberRegex = /-?\d+(\.\d+)?/g;
+
+  // Extract numbers from the display value
+  const numbers = displayValue.match(numberRegex);
+
+  // Get the last number from the extracted numbers
+  const lastNumber = numbers[numbers.length - 1];
+
+  // Check if the last number exists and is not empty
+  if (lastNumber) {
+    // Calculate the percentage of the last number
+    const parsedLastNumber = parseFloat(lastNumber);
+    const percentage = parsedLastNumber / 100;
+
+    // Replace the last number with its percentage value
+    const modifiedExpression = displayValue.replace(
+      new RegExp(`${lastNumber}$`),
+      percentage.toString()
+    );
+
+    // Update the display value
+    displayValue = modifiedExpression;
+
+    // Update the display
+    updateDisplay();
+  }
+});
