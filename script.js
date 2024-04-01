@@ -107,14 +107,8 @@ document.querySelectorAll(".operator").forEach((button) => {
 
 // Add event listener to equal button
 document.querySelector(".equal").addEventListener("click", () => {
-  // Handle invalid or incomplete inputs [Egs. Case 1: 6+, Case 2: 'Syntax ERROR', Case 3: -6]
-  if ("+-x÷".includes(displayValue.at(-1)) || +displayValue === NaN || displayValue.match(/[+x÷]/) === null) {
-    displayValue = displayValue;
-    updateDisplay();
-  }
-
   // Check if displayValue contains both 'x' and '-'
-  else if (displayValue.includes("x") && displayValue.includes("-")) {
+  if (displayValue.includes("x") && displayValue.includes("-")) {
     operator = "x";
     [firstNumber, secondNumber] = displayValue.split(operator).map(parseFloat);
 
