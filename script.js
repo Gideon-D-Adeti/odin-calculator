@@ -120,9 +120,7 @@ function validateExpression(displayValue) {
   }
   // Check if displayValue contains any non-digit characters apart from operators and decimal points
   if (/[^\d+\-x÷.]/.test(displayValue)) {
-    // Clear the display
-    clearDisplay();
-    return;
+    return "error";
   } else {
     return true;
   }
@@ -132,6 +130,9 @@ function validateExpression(displayValue) {
 document.querySelector(".equal").addEventListener("click", () => {
   if (validateExpression(displayValue) === false) {
     return; // Do nothing
+  } else if (validateExpression(displayValue) === "error") {
+    displayValue = "Syntax ERROR";
+    updateDisplay();
   }
   // Check if displayValue contains both 'x' and '-'
   if (displayValue.includes("x") && displayValue.includes("-")) {
