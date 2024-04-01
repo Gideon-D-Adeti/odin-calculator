@@ -117,6 +117,12 @@ function validateExpression(displayValue) {
   // Check if displayValue is just a number (positive or negative)
   else if (/^-?\d+$/.test(displayValue)) {
     return false;
+  }
+  // Check if displayValue is not a valid number
+  else if (isNaN(displayValue)) {
+    // Clear the display
+    displayValue = "";
+    updateDisplay();
   } else {
     return true;
   }
