@@ -118,11 +118,11 @@ function validateExpression(displayValue) {
   else if (/^-?\d+$/.test(displayValue)) {
     return false;
   }
-  // Check if displayValue is not a valid number
-  else if (isNaN(displayValue)) {
+  // Check if displayValue contains any non-digit characters apart from operators and decimal points
+  if (/[^\d+\-x÷.]/.test(displayValue)) {
     // Clear the display
-    displayValue = "";
-    updateDisplay();
+    clearDisplay();
+    return;
   } else {
     return true;
   }
