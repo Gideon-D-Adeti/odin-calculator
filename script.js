@@ -135,6 +135,10 @@ function validateExpression(displayValue) {
   if (displayValue === "") {
     return false;
   }
+  // Check if displayValue ends with a decimal
+  else if (displayValue.endsWith(".")) {
+    return false;
+  }
   // Check if displayValue ends with an operator
   else if ("+-x÷".includes(displayValue.at(-1))) {
     return false;
