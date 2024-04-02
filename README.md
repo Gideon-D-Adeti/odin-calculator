@@ -20,8 +20,25 @@ This is a simple calculator project implemented using HTML, CSS, and JavaScript.
 3. Use the calculator by clicking on the number buttons and operators.
 4. Alternatively, you can access the deployed version by clicking on the link at the "About" section of this repository.
 
+### Keyboard Support
+
+- Use the number keys (0-9) to input numbers.
+- Use the following keys for operators:
+  - Addition: +
+  - Subtraction: -
+  - Multiplication: *
+  - Division: /
+- Use Enter to calculate the result.
+- Use Backspace to delete the last character.
+- Use the % key to convert the current number to a percentage.
+- Use the . key to add a decimal point to the current number.
+
 ## Project Structure
 
 - `index.html`: The main HTML file containing the calculator layout.
 - `styles.css`: The CSS file for styling the calculator.
 - `script.js`: The JavaScript file containing the calculator logic.
+
+## Author
+
+This project was created by Gideon D. Adeti.
