@@ -144,7 +144,7 @@ function validateExpression(displayValue) {
     return false;
   }
   // Check if displayValue is just a number (positive or negative)
-  else if (/^-?\d+$/.test(displayValue)) {
+  else if (/^-?\d+(\.\d+)?$/.test(displayValue)) {
     return false;
   }
   // Check if displayValue contains any non-digit characters apart from operators and decimal points
