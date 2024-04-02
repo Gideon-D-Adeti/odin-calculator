@@ -291,3 +291,44 @@ document.querySelector(".percent").addEventListener("click", () => {
     updateDisplay();
   }
 });
+
+// Add keyboard support
+document.addEventListener("keydown", function (event) {
+  const key = event.key;
+  let button;
+
+  // Map keyboard keys to calculator buttons
+  switch (key) {
+    case "Enter":
+      button = document.querySelector(".equal");
+      break;
+    case "Backspace":
+      button = document.querySelector(".backspace");
+      break;
+    case "Delete":
+      button = document.querySelector(".clear");
+      break;
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+      button = document.querySelector(`.operator[data-value="${key}"]`);
+      break;
+    case ".":
+      button = document.querySelector(".decimal");
+      break;
+    case "%":
+      button = document.querySelector(".percent");
+      break;
+    default:
+      // Check if the key is a number
+      if (!isNaN(key)) {
+        button = document.querySelector(`.number[data-value="${key}"]`);
+      }
+  }
+
+  // If a corresponding button is found, simulate a click
+  if (button) {
+    button.click();
+  }
+});
